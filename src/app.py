@@ -33,10 +33,13 @@ def get_family():
     response_body = members
     return jsonify(response_body), 200
 
-# GET 1 MEMBERS
-@app.route('/member/<int:member_id>', methods=['GET'])
-def get_member(member_id):
-    member = jackson_family.get_member(member_id)
+# GET 1 MEMBER
+@app.route('/member/<int:id>', methods=['GET'])
+def get_oneMember(id):
+    member = jackson_family.get_member(id)
+    if member is None:
+        return jsonify({'requested_member_id': member,
+                        'msg': 'That family member does not exist'}), 400
     response_body = member
     return jsonify(response_body), 200
 
@@ -45,15 +48,13 @@ def get_member(member_id):
 def add_member():
     body = request.get_json(silent=True)
     if body is None: 
-        return jsonify({'msg': 'You must add a body'}), 400
+        return jsonify({"msg": "You must add a body"}), 400
     if 'first_name' not in body: 
-        return jsonify({'msg': 'You must add a first name'}), 400
-    if 'last_name' not in body: 
-        return jsonify({'msg': 'You must add a last name'}), 400
+        return jsonify({"msg": "You must specify a 'first_name'"}), 400
     if 'age' not in body: 
-        return jsonify({'msg': 'You must add an age'}), 400
+        return jsonify({"msg": "You must specify an 'age'"}), 400
     if 'lucky_numbers' not in body: 
-        return jsonify({'msg': "You must add this person's lucky numbers"}), 400
+        return jsonify({"msg": "You must specify this persons 'lucky_numbers' (in a list format e.g. [1, 2, 3])"}), 400
    
     id_number = jackson_family._generateId()
     if id_number in body:
@@ -69,6 +70,28 @@ def add_member():
    
     jackson_family.add_member(new_member)
     return jsonify({'msg': 'New family member added', 'new_member': new_member}), 200
+
+
+# DELETE 1 FAMILY MEMBER
+@app.route('/member/<int:id>', methods=['DELETE'])
+def delete_oneMember(id):
+    member = jackson_family.get_member(id)
+    if member is None:
+        return jsonify({'msg': 'That family member does not exist'}), 400
+    jackson_family.delete_member(id)
+    deleted_member = member
+    current_family = jackson_family.get_all_members
+    return jsonify({
+        'done': 'True',
+        'Member removed': deleted_member,
+        'Current Family': current_family}), 200
+
+
+''' Problema:
+    (Asegúrate de no añadir un body al request de DELETE)
+    --> Borra el miembro pero no recibo la respuesta especificada en el endpoint ().
+    Solo recibo el JSON 'msg': 'That family member does not exist'
+'''
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':

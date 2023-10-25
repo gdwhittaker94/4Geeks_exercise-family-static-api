@@ -30,11 +30,27 @@ class FamilyStructure:
         pass
 
     def delete_member(self, id):
-        # fill this method and update the return
+        member_id = id 
+        if member_id is None: 
+            return None  
+        
+        members_to_remove = []
+
+        for member in self._members: 
+            if member['id'] == member_id:
+                members_to_remove.append(member)
+
+        for member in members_to_remove:
+            self._members.remove(member)
+            
         pass
 
     def get_member(self, id):
-        return self._members[id-1]
+        member_id = id 
+        for member in self._members: 
+            if member['id'] == member_id:
+                return member
+        return None  
         pass
 
     # finished method: returns a list with all the family members
