@@ -56,9 +56,10 @@ def add_member():
     if 'lucky_numbers' not in body: 
         return jsonify({"msg": "You must specify this persons 'lucky_numbers' (in a list format e.g. [1, 2, 3])"}), 400
    
-    id_number = jackson_family._generateId()
     if id_number in body:
         id_number = body['id_number']
+    else: 
+        id_number = jackson_family._generateId()
 
     new_member = {
         'id': id_number,
@@ -67,10 +68,12 @@ def add_member():
         'age': body['age'],
         'lucky_numbers': body['lucky_numbers']
     }
-   
-    jackson_family.add_member(new_member)
-    return jsonify({'msg': 'New family member added', 'new_member': new_member}), 200
 
+    jackson_family.add_member(new_member)
+    family = jackson_family.get_all_members()
+    return jsonify({'msg': 'New family member added',
+                    'new_member': new_member,
+                    'Total family': family}), 200
 
 # DELETE 1 FAMILY MEMBER
 @app.route('/member/<int:id>', methods=['DELETE'])
@@ -80,18 +83,11 @@ def delete_oneMember(id):
         return jsonify({'msg': 'That family member does not exist'}), 400
     jackson_family.delete_member(id)
     deleted_member = member
-    current_family = jackson_family.get_all_members
+    current_family = jackson_family.get_all_members()
     return jsonify({
         'done': 'True',
         'Member removed': deleted_member,
-        'Current Family': current_family}), 200
-
-
-''' Problema:
-    (Asegúrate de no añadir un body al request de DELETE)
-    --> Borra el miembro pero no recibo la respuesta especificada en el endpoint ().
-    Solo recibo el JSON 'msg': 'That family member does not exist'
-'''
+        'Total Family': current_family}), 200
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
