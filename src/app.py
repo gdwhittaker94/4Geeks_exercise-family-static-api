@@ -85,7 +85,7 @@ def delete_oneMember(id):
     deleted_member = member
     current_family = jackson_family.get_all_members()
     return jsonify({
-        'done': 'True',
+        'done': True,
         'Member removed': deleted_member,
         'Total Family': current_family}), 200
 
