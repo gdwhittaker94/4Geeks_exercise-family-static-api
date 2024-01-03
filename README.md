@@ -1,36 +1,14 @@
-<!-- hide -->
 # Family Static API
-<!-- endhide -->
 
-The Jackson Family needs a static API! We need to build the *data structures* and create API endpoint to interact with it using Postman.
+This project was designed to give us more practice with data structures and creating an API using Python, but specifically through a class-based structure instead of a function based structure. We used Postman to test our endpoints. 
 
-## 🌱  How to start this project
+My code can be found within the "src" folder. 
 
-This project comes with the necessary files to start working immediately.
-
-We recommend opening this very same repository using a provisioning tool like [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recommended) or [Gitpod](https://4geeks.com/lesson/how-to-use-gitpod). Alternatively, you can clone it on your local computer using the `git clone` command.
-
-This is the repository you need to open:
-
-```txt
-https://github.com/breatheco-de/exercise-family-static-api
-```
-
-**👉 Please follow these steps on** [how to start a coding project](https://4geeks.com/lesson/how-to-start-a-project).
-
-## 💻 Installation
-
-2. Install the project dependencies by running `$ pipenv install`.
-
-3. Get inside the virtual environment by running `$ pipenv shell`
-
-4. Start the server by running `$ pipenv run start`
-
-5. Test your code by running `$ pipenv run test`
-
-## ✅ Automatic grading
-
-Test your code by running `$ pipenv run test`
+## Project Notes 
+- Install the project dependencies by running `$ pipenv install`.
+- Get inside the virtual environment by running `$ pipenv shell`
+- Start the server by running `$ pipenv run start`
+- Test your code by running `$ pipenv run test` --> Automatic grading!
 
 ## 📝 Instructions
 
@@ -39,9 +17,7 @@ Test your code by running `$ pipenv run test`
 2) The only two files you have to edit are:  
 
 - `src/datastructure.py`: Contains the class with the rules on how to manage the family members.  
-- `src/app.py`: Contains the API, it uses the Family as data structure. 
-	
-3) We have prepared a set of automated tests that will give you an idea if your code is correct, run the tests by typing `$ pipenv run test` on the command line.  
+- `src/app.py`: Contains the API, it uses the Family as data structure.  
 
 ## Data structures
 
@@ -204,5 +180,3 @@ body: {
 - All requests and responses should be in content/type: application/json
 - Response codes must be `200` for success, `400` for bad request or `404` for not found.
 - These exercises do not include a database, everything must be done in Runtime (RAM).
-
-This and many other projects are built by students as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
